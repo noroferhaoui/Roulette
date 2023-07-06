@@ -3,7 +3,7 @@ import { Database as ReplitDB } from "quick.replit";
 import inquirer from "inquirer";
 import startBot from "./bot.js";
 import { Interval } from 'quickinterval';
-import { createRouletteGifImage, shuffleArray, getRandomDarkHexCode, createRouletteImage, getRandomNumber } from "roulette-image";
+import { createRouletteGifImage, shuffleArray, getRandomDarkHexCode, createRouletteImage, getRandomNumber } from "../roulette-image/src/index.js";
 import { InteractionCollector } from 'eris-collects';
 const is_replit = process.env.REPL_ID && process.env.REPL_SLUG && process.env.REPL_OWNER;
 const noro = `███    ██  ██████  ██████   ██████  
@@ -189,7 +189,7 @@ async function runAction(auto_run) {
     await settings.set("prefix", "-");
     await settings.set("roulette_command_names", ["roulette", "روليت"]);
     await settings.set("stop_command_names", ["stop", "توقف"]);
-    await settings.set("reset", "احذف هذا السطر إذا كنت تريد تحط توكن جديد");
+    await settings.set("reset", "احذف هذا السطر إذا حبيت تبدل توكن");
     return await runAction();
   };
 };
@@ -210,7 +210,7 @@ async function startProject() {
   let timeEnd = await settings.has("reset") && await config.has("token") ? 1000 : 5000
   new Interval(async (int) => {
     process.stdout.write('\x1Bc');
-    process.stdout.write(`\r\u001b[38;5;${getRandomNumber(230)}m${noro}\u001b[0m\n\n\u001b[1mﻲﺒﻨﻟﺍ ﻰﻠﻋ ةﻼﺻﻭ رﺎﻔﻐﺘﺳﻻﺍ ﺮﺜﻛﻭ ،ﻪﻠﻟﺍ ﺮﻛﺫ َﺲﻨﺗ ﻻ\u001b[0m`);
+    process.stdout.write(`\r\u001b[38;5;${getRandomNumber(230)}m${noro}\u001b[0m\n\n\u001b[1m NORO LOVES YOU\u001b[0m`);
     if (int.elapsedTime >= timeEnd) {
       int.pause();
       await runAction(true);
