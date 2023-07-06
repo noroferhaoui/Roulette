@@ -3,15 +3,16 @@ import { getRandomDarkHexCode, getRandomNumber } from "roulette-image";
 import { startRoundRoulette, disabledMultipleButtons, getMultipleButtons } from "./functions.js"
 const roulette_games = new Map();
 
-export default async function (bot, interaction, type = "slash", settings) {
+export default async function(bot, interaction, type = "slash", settings) {
   let roulette_command_names = await settings.has("roulette_command_names") ? await settings.get("roulette_command_names") : ["roulette", "روليت"]
   let stop_command_names = await settings.has("stop_command_names") ? await settings.get("stop_command_names") : ["stop", "توقف"]
 
 
   if (interaction.type == 2 && stop_command_names.map(e => e.toLowerCase()).includes(interaction.data.name.toLowerCase())) {
-    if (!interaction.member.permissions.has("manageEvents")) return await interaction.createMessage({
+   
+    if (!interaction.member.roles.includes("1059531698687193140")) return await interaction.createMessage({
       "flags": 64,
-      "content": ":x: | فقط Manga Events يمكنهم قيام بهذا الامر ",
+      "content": ":x: | فقط Roulette Manager يمكنهم قيام بهذا الامر ",
     })
     if (!roulette_games.has(interaction.guildID)) return await interaction.createMessage({
       "content": "❌ لا توجد لعبة قيد التشغيل في الوقت الحالي"
@@ -22,9 +23,9 @@ export default async function (bot, interaction, type = "slash", settings) {
     })
   }
   if (interaction.type == 2 && roulette_command_names.map(e => e.toLowerCase()).includes(interaction.data.name.toLowerCase())) {
-    if (!interaction.member.permissions.has("manageEvents")) return await interaction.createMessage({
+    if (!interaction.member.roles.includes("1059531698687193140")) return await interaction.createMessage({
       "flags": 64,
-      "content": ":x: | فقط Manga Events يمكنهم قيام بهذا الامر ",
+      "content": ":x: | فقط Roulette Manager يمكنهم قيام بهذا الامر ",
     })
     if (roulette_games.has(interaction.guildID)) return await interaction.createMessage({
       "flags": 64,
